@@ -23,6 +23,11 @@ public class testController {
 		return "Hola estudiantes de la 15B";
 	}
 	
+		@GetMapping(value="/saludando")
+	public String helloOtraPromo() {
+		return "Hola estudiantes de la 16B";
+	}
+	
 	@GetMapping(value="/sumar")
     public int sumar(
             @RequestParam int numero1,
