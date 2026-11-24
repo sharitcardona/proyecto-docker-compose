@@ -17,6 +17,12 @@ public class testController {
 	
 	@Autowired
 	IPruebaService services;
+
+	@GetMapping(value="/despliegue")
+	public String despliegue() {
+		return "YA DESPLIEGO EN FORMA AUTOMATICA";
+	}
+	
 	
 	@GetMapping(value="/saludar")
 	public String hello() {
