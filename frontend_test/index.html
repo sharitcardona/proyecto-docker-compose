@@ -2,75 +2,51 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frontend Spring Boot</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <h1>Consumo API Spring Boot</h1>
+    <header class="encabezado">
+        <h1>Consumo API Spring Boot</h1>
+        <p>Grupo 16B · Docker Compose + CI/CD</p>
+    </header>
 
-    <h2>Saludar</h2>
-    <button onclick="saludar()">Probar /saludar</button>
-    <p id="resultadoSaludo"></p>
+    <main class="contenedor">
 
-    <h2>Sumar dos números</h2>
-    <input type="number" id="numero1" placeholder="Número 1">
-    <input type="number" id="numero2" placeholder="Número 2">
-    <button onclick="sumar()">Sumar</button>
-    <p id="resultadoSuma"></p>
+        <section class="tarjeta">
+            <h2>Saludar</h2>
+            <div class="botones">
+                <button onclick="saludar()">Probar /saludar</button>
+                <button onclick="saludando()">Probar /saludando</button>
+                <button onclick="despliegue()">Probar /despliegue</button>
+            </div>
+            <p id="resultadoSaludo" class="resultado"></p>
+        </section>
 
-    <h2>Lista desde base de datos</h2>
-    <button onclick="listar()">Consultar /lista</button>
-    <ul id="listaDatos"></ul>
+        <section class="tarjeta">
+            <h2>Sumar dos números</h2>
+            <div class="fila">
+                <input type="number" id="numero1" placeholder="Número 1">
+                <span class="signo">+</span>
+                <input type="number" id="numero2" placeholder="Número 2">
+                <button onclick="sumar()">Sumar</button>
+            </div>
+            <p id="resultadoSuma" class="resultado"></p>
+        </section>
 
-    <script>
-        const API_URL = "/api";
+        <section class="tarjeta">
+            <h2>Lista desde base de datos</h2>
+            <button onclick="listar()">Consultar /lista</button>
+            <ul id="listaDatos" class="lista"></ul>
+        </section>
 
-        function saludar() {
-            fetch(`${API_URL}/saludar`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("resultadoSaludo").innerText = data;
-                })
-                .catch(error => {
-                    document.getElementById("resultadoSaludo").innerText = "Error al consumir /saludar";
-                    console.error(error);
-                });
-        }
+    </main>
 
-        function sumar() {
-            const numero1 = document.getElementById("numero1").value;
-            const numero2 = document.getElementById("numero2").value;
+    <footer class="pie">Uniempresarial · Despliegue Continuo</footer>
 
-            fetch(`${API_URL}/sumar?numero1=${numero1}&numero2=${numero2}`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("resultadoSuma").innerText = "Resultado: " + data;
-                })
-                .catch(error => {
-                    document.getElementById("resultadoSuma").innerText = "Error al consumir /sumar";
-                    console.error(error);
-                });
-        }
-
-        function listar() {
-            fetch(`${API_URL}/lista`)
-                .then(response => response.json())
-                .then(data => {
-                    const lista = document.getElementById("listaDatos");
-                    lista.innerHTML = "";
-
-                    data.forEach(item => {
-                        const li = document.createElement("li");
-                        li.textContent = JSON.stringify(item);
-                        lista.appendChild(li);
-                    });
-                })
-                .catch(error => {
-                    console.error(error);
-                    document.getElementById("listaDatos").innerHTML = "<li>Error al consumir /lista</li>";
-                });
-        }
-    </script>
+    <script src="js/app.js"></script>
 
 </body>
 </html>
